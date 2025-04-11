@@ -1,0 +1,46 @@
+<mat-card>
+  <mat-card-title>Register Taxi</mat-card-title>
+  <mat-card-content>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="taxi-form">
+      <!-- License Plate -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>License Plate</mat-label>
+        <input matInput name="licensePlate" ngModel required pattern="[A-Z0-9]{6}">
+      </mat-form-field>
+
+      <!-- Brand Dropdown -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Brand</mat-label>
+        <mat-select name="brand" ngModel required>
+          <mat-option *ngFor="let brand of brands" [value]="brand">{{ brand }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Model Dropdown -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Model</mat-label>
+        <mat-select name="model" ngModel required>
+          <mat-option *ngFor="let model of models" [value]="model">{{ model }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Year Input -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Purchase Year</mat-label>
+        <input matInput type="number" name="purchaseYear" ngModel required [max]="currentYear">
+      </mat-form-field>
+
+      <!-- Comfort Level -->
+      <div class="comfort-level form-field">
+        <mat-label>Comfort Level</mat-label>
+        <mat-radio-group name="comfortLevel" ngModel required>
+          <mat-radio-button *ngFor="let level of comfortLevels" [value]="level" class="radio-button">
+            {{ level }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" class="submit-button">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,31 @@
+/* Table header */
+.mat-header-row {
+    background-color: var(--main-pink) !important;
+  }
+  
+  .mat-header-cell {
+    color: var(--text-pink) !important;
+    font-weight: 500;
+  }
+  
+  /* Table rows */
+  .mat-row:nth-child(even) {
+    background-color: #fff9fa; /* Very light pink */
+  }
+  
+  /* Hover effect */
+  .mat-row:hover {
+    background-color: var(--darker-pink) !important;
+    opacity: 0.8;
+  }
+  
+  /* Comfort level badges */
+  .comfort-label {
+    background-color: var(--main-pink);
+    color: var(--text-pink);
+  }
+  
+  .comfort-label.luxury {
+    background-color: var(--text-pink);
+    color: white;
+  }

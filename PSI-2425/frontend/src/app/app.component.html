@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <span>Taxi Management</span>
+  
+  <nav class="nav-links">
+    <a mat-button routerLink="/register" routerLinkActive="active">
+      <mat-icon>directions_car</mat-icon>
+      Register Taxi
+    </a>
+    <a mat-button routerLink="/list" routerLinkActive="active">
+      <mat-icon>list_alt</mat-icon>
+      View Taxis
+    </a>
+  </nav>
+</mat-toolbar>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
