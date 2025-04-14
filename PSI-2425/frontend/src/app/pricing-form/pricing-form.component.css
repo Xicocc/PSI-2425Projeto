@@ -1,0 +1,31 @@
+.pricing-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .comfort-level {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .radio-button {
+    margin-right: 1rem;
+  }
+  
+  .submit-button {
+    margin-top: 1rem;
+    align-self: flex-end;
+  }
+  
+  mat-error {
+    font-size: 0.75rem;
+  }

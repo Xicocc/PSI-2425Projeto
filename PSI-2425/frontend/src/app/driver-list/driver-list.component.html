@@ -1,0 +1,56 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Condutores Registados</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <table mat-table [dataSource]="drivers" class="mat-elevation-z8">
+        
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let driver">{{ driver.name }}</td>
+        </ng-container>
+  
+        
+        <ng-container matColumnDef="nif">
+            <th mat-header-cell *matHeaderCellDef>NIF</th>
+            <td mat-cell *matCellDef="let driver">{{ driver.nif }}</td>
+        </ng-container>
+        
+        
+        <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef>Genero</th>
+            <td mat-cell *matCellDef="let driver">{{ driver.gender }}</td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="birthYear">
+            <th mat-header-cell *matHeaderCellDef>Ano de Nascimento</th>
+            <td mat-cell *matCellDef="let driver">{{ driver.birthYear }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="license">
+            <th mat-header-cell *matHeaderCellDef>Carta de Conducao</th>
+            <td mat-cell *matCellDef="let driver">{{ driver.licenseNumber }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef>Morada</th>
+            <td mat-cell *matCellDef="let driver">{{ driver.address.street }}, {{ driver.address.city }}, {{ driver.address.postalCode }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Ações</th>
+          <td mat-cell *matCellDef="let driver">
+            <button mat-icon-button color="warn" (click)="deleteDriver(driver._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>

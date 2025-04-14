@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; // Add this
-import { FormsModule } from '@angular/forms'; // Add this
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { TaxiRegisterComponent } from './taxi-register/taxi-register.component'; // Adjust paths
+import { TaxiRegisterComponent } from './taxi-register/taxi-register.component';
 import { TaxiListComponent } from './taxi-list/taxi-list.component';
+import { HomeComponent } from './home/home.component';
+import { DriverRegisterComponent } from './driver-register/driver-register.component';
+import { DriverListComponent } from './driver-list/driver-list.component';
+import { PricingFormComponent } from './pricing-form/pricing-form.component';
+import { TripCalculatorComponent } from './trip-calculator/trip-calculator.component';
 
 // Material Modules
 import { MatTableModule } from '@angular/material/table';
@@ -20,18 +25,29 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TaxiRegisterComponent,
-    TaxiListComponent
+    TaxiListComponent,
+    HomeComponent,
+    DriverRegisterComponent,
+    DriverListComponent,
+    PricingFormComponent,
+    TripCalculatorComponent,
   ],
   imports: [
     BrowserModule,
-    HttpClientModule, // Add this
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     MatTableModule,
@@ -42,9 +58,16 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatSortModule,
     MatBadgeModule,
+    MatSnackBarModule,
     MatRadioModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

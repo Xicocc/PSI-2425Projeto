@@ -1,0 +1,32 @@
+<mat-card class="home-card">
+    <mat-card-header>
+      <mat-card-title>Bem-vindo à Gestão de Táxis</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="home-content">
+        <p>Selecione uma opção abaixo para começar:</p>
+        
+        <div class="action-buttons">
+          <a mat-raised-button color="primary" routerLink="/register-taxi">
+            <mat-icon>local_taxi</mat-icon>
+            Registar Novo Táxi
+          </a>
+          
+          <a mat-raised-button color="accent" routerLink="/list-taxi">
+            <mat-icon>list_alt</mat-icon>
+            Lista de Táxis
+          </a>
+
+          <a mat-raised-button color="primary" routerLink="/register-driver">
+            <mat-icon>face</mat-icon>
+            Registar Novo Condutor
+          </a>
+
+          <a mat-raised-button color="accent" routerLink="/list-driver">
+            <mat-icon>face</mat-icon>
+            Lista de Condutores
+          </a>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>

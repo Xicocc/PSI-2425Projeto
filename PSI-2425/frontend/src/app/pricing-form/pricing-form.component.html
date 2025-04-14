@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-title>Atualizar Preços</mat-card-title>
+  <mat-card-content>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="pricing-form">
+      <!-- Comfort Level Radio Group -->
+      <div class="comfort-level form-field">
+        <mat-label>Nível de Conforto</mat-label>
+        <mat-radio-group name="comfortLevel" [(ngModel)]="pricingData.comfortLevel" required>
+          <mat-radio-button *ngFor="let level of comfortLevels" [value]="level" class="radio-button">
+            {{ level }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Price Per Minute -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Preço por Minuto</mat-label>
+        <input matInput 
+               type="number" 
+               name="pricePerMinute" 
+               [(ngModel)]="pricingData.pricePerMinute"
+               step="0.01" 
+               min="0.01" 
+               required>
+        <span matSuffix>€/min</span>
+        <mat-error *ngIf="form.controls['pricePerMinute']?.invalid">
+          Valor mínimo: 0.01€
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Night Surcharge -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Acréscimo Noturno</mat-label>
+        <input matInput 
+               type="number" 
+               name="nightSurchargePercent" 
+               [(ngModel)]="pricingData.nightSurchargePercent"
+               min="0" 
+               max="100" 
+               required>
+        <span matSuffix>%</span>
+        <mat-error *ngIf="form.controls['nightSurchargePercent']?.invalid">
+          Deve ser entre 0-100%
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button 
+              color="primary" 
+              type="submit" 
+              [disabled]="!form.valid"
+              class="submit-button">
+        Atualizar
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

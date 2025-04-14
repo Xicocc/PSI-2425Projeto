@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms'; // Add this import
+import { NgForm } from '@angular/forms';
 import { TaxiService } from '../taxi.service';
 
 @Component({
@@ -26,18 +26,24 @@ export class TaxiRegisterComponent {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      // Convert purchaseYear to number before sending
       const formData = {
         ...form.value,
+        licensePlate: form.value.licensePlate.toUpperCase(), // Ensure uppercase
         purchaseYear: Number(form.value.purchaseYear)
       };
   
+      console.log('Submitting:', formData); // Debug log
+  
       this.taxiService.registerTaxi(formData).subscribe({
-        next: (taxi) => {
+        next: (response: any) => {
+          console.log('Full response:', response); // Debug log
           alert('Taxi registered successfully!');
-          form.reset();
+          form.resetForm();
         },
-        error: (err) => alert('Error: ' + err.error.error)
+        error: (err) => {
+          console.error('Registration error:', err);
+          alert(`Registration failed: ${err.message}`);
+        }
       });
     }
   }

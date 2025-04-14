@@ -1,40 +1,42 @@
 const mongoose = require('mongoose');
 
-const comfortLevels = ['Básico', 'Luxuoso']; // RIA 16 compliance
+const comfortLevels = ['Básico', 'Luxuoso'];
 
 const taxiSchema = new mongoose.Schema({
   licensePlate: { 
     type: String, 
     required: true,
+    unique: true,
     validate: {
-      validator: (v) => /^[A-Z0-9]{6}$/.test(v), // Example: "AB123C" (mix of letters/numbers)
-      message: 'License plate must be 6 chars with letters and digits!'
+      validator: (v) => /^[A-Z0-9]{6}$/.test(v),
+      message: 'Matricula tem de ter 6 caracteres com letras e numeros!'
     }
   },
   brand: { 
     type: String, 
     required: true,
-    enum: ['Mercedes', 'Toyota', 'BMW', 'Volkswagen'] // Predefined list
+    enum: ['Mercedes', 'Toyota', 'BMW', 'Volkswagen']
   },
   model: { 
     type: String, 
     required: true,
-    enum: ['Sedan', 'SUV', 'Van', 'Hybrid'] // Predefined list
+    enum: ['Sedan', 'SUV', 'Van', 'Hybrid']
   },
   purchaseYear: {
     type: Number,
-    required: [true, 'Purchase year is required'],
-    max: [new Date().getFullYear(), 'Year cannot be in the future']
+    required: [true, 'Ano de Compra'],
+    max: [new Date().getFullYear(), 'Ano nao pode ser no futuro']
   },
   comfortLevel: { 
     type: String, 
     required: true, 
-    enum: comfortLevels // RIA 16 compliance
+    enum: comfortLevels
   },
   createdAt: { 
     type: Date, 
-    default: Date.now // Auto-set on creation
+    default: Date.now
   }
 }, { collection: 'taxis' });
+
 
 module.exports = mongoose.model('Taxi', taxiSchema);

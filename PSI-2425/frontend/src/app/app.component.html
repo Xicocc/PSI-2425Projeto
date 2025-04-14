@@ -1,14 +1,33 @@
 <mat-toolbar color="primary">
-  <span>Taxi Management</span>
+  <span routerLink="/" style="cursor: pointer; display: flex; align-items: center;">
+    <mat-icon>home</mat-icon>
+    Taxi Manager
+  </span>
   
   <nav class="nav-links">
-    <a mat-button routerLink="/register" routerLinkActive="active">
-      <mat-icon>directions_car</mat-icon>
-      Register Taxi
+    <a mat-button routerLink="/register-taxi" routerLinkActive="active">
+      <mat-icon>local_taxi</mat-icon>
+      Registar Taxi
     </a>
-    <a mat-button routerLink="/list" routerLinkActive="active">
+    <a mat-button routerLink="/list-taxi" routerLinkActive="active">
       <mat-icon>list_alt</mat-icon>
-      View Taxis
+      Lista de Taxis
+    </a>
+    <a mat-button routerLink="/register-driver" routerLinkActive="active">
+      <mat-icon>face</mat-icon>
+      Registar Condutores
+    </a>
+    <a mat-button routerLink="/list-driver" routerLinkActive="active">
+      <mat-icon>face</mat-icon>
+      Lista de Condutores
+    </a>
+    <a mat-button routerLink="/pricing" routerLinkActive="active">
+      <mat-icon>face</mat-icon>
+      Precos
+    </a>
+    <a mat-button routerLink="/calculator" routerLinkActive="active">
+      <mat-icon>face</mat-icon>
+      Calcular viagem
     </a>
   </nav>
 </mat-toolbar>

@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-card-content>
+      <!-- Simple Form -->
+      <form [formGroup]="tripForm" (ngSubmit)="calculateTrip()">
+        <h2>Calcular Viagem</h2>
+  
+        <!-- Comfort Level Dropdown -->
+        <mat-form-field>
+          <mat-label>Nível de Conforto</mat-label>
+          <mat-select formControlName="comfortLevel">
+            <mat-option value="Básico">Básico</mat-option>
+            <mat-option value="Luxuoso">Luxuoso</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <!-- Start Time -->
+        <mat-form-field>
+          <mat-label>Início</mat-label>
+          <input matInput type="datetime-local" formControlName="startTime">
+        </mat-form-field>
+  
+        <!-- End Time -->
+        <mat-form-field>
+          <mat-label>Fim</mat-label>
+          <input matInput type="datetime-local" formControlName="endTime">
+        </mat-form-field>
+  
+        <!-- Submit Button -->
+        <button mat-raised-button color="primary" type="submit">Calcular</button>
+      </form>
+  
+      <!-- Basic Results Display -->
+      <div *ngIf="calculationResult" style="margin-top: 20px;">
+        <h3>Resultado:</h3>
+        <p>Total: {{ calculationResult.totalCost | currency:'EUR' }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>

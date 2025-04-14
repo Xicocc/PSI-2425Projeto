@@ -4,14 +4,14 @@ import { catchError, timeout } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class TaxiService {
-  private apiUrl = 'http://localhost:5000/api/taxis';
+export class DriverService {
+  private apiUrl = 'http://localhost:5000/api/drivers';
   private requestTimeout = 30000;
 
   constructor(private http: HttpClient) {}
 
-  registerTaxi(taxiData: any) {
-    return this.http.post(this.apiUrl, taxiData, {
+  registerDriver(driverData: any) {
+    return this.http.post(this.apiUrl, driverData, {
       observe: 'response',
       responseType: 'json'
     }).pipe(
@@ -20,7 +20,7 @@ export class TaxiService {
     );
   }
 
-  getTaxis() {
+  getDrivers() {
     return this.http.get<any[]>(this.apiUrl).pipe(
       timeout(this.requestTimeout),
       catchError(this.handleError)
@@ -40,7 +40,7 @@ export class TaxiService {
     }
   }
 
-    deleteTaxi(driverId: string): Observable<any> {
-      return this.http.delete(`${this.apiUrl}/${driverId}`);
-    }
+  deleteDriver(driverId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${driverId}`);
+  }
 }

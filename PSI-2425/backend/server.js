@@ -3,30 +3,31 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const taxiRoutes = require('./routes/taxiRoutes');
-
+const driverRoutes = require('./routes/driverRoutes');
+const pricingRoutes = require('./routes/pricingRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors()); // Enable CORS for Angular (http://localhost:4200)
-app.use(express.json()); // Parse JSON bodies
+app.use(express.json({ limit: '10kb' }));
 
-// MongoDB Atlas Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB Atlas'))
-  .catch(err => console.error('MongoDB connection error:', err));
+app.use(cors());
 
-// Routes
+mongoose.connect(process.env.MONGODB_URI, {
+  serverSelectionTimeoutMS: 5000
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB error:', err));
+
+
 app.use('/api/taxis', taxiRoutes);
-
-// Error handling middleware
+app.use('/api/drivers', driverRoutes);
+app.use('/api/pricing', pricingRoutes);
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: 'Something broke!' });
+  res.status(500).json({ error: 'Server error' });
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

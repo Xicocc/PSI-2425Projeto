@@ -1,0 +1,31 @@
+.taxi-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-field {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .radio-button {
+    margin-right: 16px;
+  }
+  
+  .submit-button {
+    margin-top: 16px;
+    align-self: flex-start;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .form-field {
+      margin-bottom: 16px;
+    }
+    
+    .radio-button {
+      display: block;
+      margin: 8px 0;
+    }
+  }
+  

@@ -1,0 +1,80 @@
+<mat-card>
+    <mat-card-title>Registar Condutor</mat-card-title>
+    <mat-card-content>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="driver-form">
+        <!-- Personal Information Section -->
+        <h3 class="section-title">Informação Pessoal</h3>
+        
+        <!-- Name -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nome Completo</mat-label>
+          <input matInput name="name" ngModel required maxlength="100">
+        </mat-form-field>
+  
+        <!-- NIF -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>NIF</mat-label>
+          <input matInput name="nif" ngModel required 
+                 pattern="[0-9]{9}" minlength="9" maxlength="9"
+                 placeholder="9 dígitos">
+          <mat-hint>Deve conter exatamente 9 dígitos</mat-hint>
+        </mat-form-field>
+  
+        <!-- Gender -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Género</mat-label>
+          <mat-select name="gender" ngModel required>
+            <mat-option *ngFor="let gender of genders" [value]="gender">{{ gender }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <!-- Birth Year -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Ano de Nascimento</mat-label>
+          <input matInput type="number" name="birthYear" ngModel required
+                 [min]="minBirthYear" [max]="maxBirthYear">
+          <mat-hint>Idade mínima: 18 anos</mat-hint>
+        </mat-form-field>
+  
+        <!-- Address Section -->
+        <h3 class="section-title">Morada</h3>
+        
+        <!-- Street -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Rua</mat-label>
+          <input matInput name="street" ngModel required maxlength="200">
+        </mat-form-field>
+  
+        <!-- Postal Code -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Código Postal</mat-label>
+          <input matInput name="postalCode" ngModel required 
+                 pattern="[0-9]{4}-[0-9]{3}" 
+                 (input)="formatPostalCode($event)"
+                 placeholder="0000-000">
+        </mat-form-field>
+  
+        <!-- City -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Localidade</mat-label>
+          <input matInput name="city" ngModel required maxlength="100">
+        </mat-form-field>
+  
+        <!-- Driver Specific Section -->
+        <h3 class="section-title">Documentos</h3>
+        
+        <!-- License Number -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Carta de Condução</mat-label>
+          <input matInput name="licenseNumber" ngModel required 
+                 pattern="[A-Z0-9]{6,12}" 
+                 placeholder="6-12 caracteres alfanuméricos">
+        </mat-form-field>
+  
+        <!-- Submit Button -->
+        <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="form.invalid">
+          Registar Condutor
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
