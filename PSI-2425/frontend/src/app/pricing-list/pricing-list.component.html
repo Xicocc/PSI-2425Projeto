@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Precos</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <table mat-table [dataSource]="prices" class="mat-elevation-z8">
+        <!-- License Plate Column -->
+        <ng-container matColumnDef="comfortLevel">
+          <th mat-header-cell *matHeaderCellDef>Nivel Conforto<th>
+          <td mat-cell *matCellDef="let prices">{{ prices.comfortLevel }}</td>
+        </ng-container>
+  
+        <!-- Brand Column -->
+        <ng-container matColumnDef="pricePerMinute">
+          <th mat-header-cell *matHeaderCellDef>Preco/min</th>
+          <td mat-cell *matCellDef="let prices">{{ prices.pricePerMinute }}</td>
+        </ng-container>
+  
+        <!-- Model Column -->
+        <ng-container matColumnDef="nightSurchargePercent">
+          <th mat-header-cell *matHeaderCellDef>Taxa Noturna %</th>
+          <td mat-cell *matCellDef="let prices">{{ prices.nightSurchargePercent }}</td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>

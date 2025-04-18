@@ -32,6 +32,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PricingListComponent } from './pricing-list/pricing-list.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DriverListComponent,
     PricingFormComponent,
     TripCalculatorComponent,
+    PricingListComponent,
   ],
   imports: [
     BrowserModule,
