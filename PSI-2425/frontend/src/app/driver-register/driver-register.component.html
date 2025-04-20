@@ -37,28 +37,57 @@
         </mat-form-field>
   
         <!-- Address Section -->
-        <h3 class="section-title">Morada</h3>
-        
-        <!-- Street -->
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Rua</mat-label>
-          <input matInput name="street" ngModel required maxlength="200">
-        </mat-form-field>
-  
-        <!-- Postal Code -->
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Código Postal</mat-label>
-          <input matInput name="postalCode" ngModel required 
-                 pattern="[0-9]{4}-[0-9]{3}" 
-                 (input)="formatPostalCode($event)"
-                 placeholder="0000-000">
-        </mat-form-field>
-  
-        <!-- City -->
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Localidade</mat-label>
-          <input matInput name="city" ngModel required maxlength="100">
-        </mat-form-field>
+      <h3 class="section-title">Morada</h3>
+      
+      <!-- Postal Code -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Código Postal</mat-label>
+        <input matInput name="postalCode" [(ngModel)]="driverData.address.postalCode" required 
+               pattern="[0-9]{4}-[0-9]{3}" 
+               (input)="formatPostalCode($event)"
+               placeholder="0000-000">
+        <mat-hint>Insira o código postal para buscar a morada</mat-hint>
+      </mat-form-field>
+
+      <!-- Address Suggestions -->
+      <div *ngIf="addressSuggestions.length > 0 && !manualAddressInput" class="suggestions-container">
+        <mat-radio-group>
+          <mat-radio-button *ngFor="let address of addressSuggestions" 
+                           [value]="address" 
+                           (click)="selectAddress(address)">
+            {{ address.address }}, {{ address.city }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Manual Input Toggle -->
+      <mat-checkbox (change)="toggleManualInput()" class="manual-toggle">
+        {{ manualAddressInput ? 'Usar busca automática' : 'Inserir morada manualmente' }}
+      </mat-checkbox>
+
+      <!-- Street (shown always but conditionally required) -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Rua</mat-label>
+        <input matInput name="street" [(ngModel)]="driverData.address.street" 
+               [required]="manualAddressInput || addressSuggestions.length === 0" 
+               maxlength="200">
+      </mat-form-field>
+
+      <!-- City (shown always but conditionally required) -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Localidade</mat-label>
+        <input matInput name="city" [(ngModel)]="driverData.address.city" 
+               [required]="manualAddressInput || addressSuggestions.length === 0" 
+               maxlength="100">
+      </mat-form-field>
+
+      <!-- Loading and Error States -->
+      <div *ngIf="isLoadingAddress" class="loading-state">
+        <mat-spinner diameter="20"></mat-spinner>
+        <span>A buscar morada...</span>
+      </div>
+      <mat-error *ngIf="addressError">{{ addressError }}</mat-error>
+
   
         <!-- Driver Specific Section -->
         <h3 class="section-title">Documentos</h3>

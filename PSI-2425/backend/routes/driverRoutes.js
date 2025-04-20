@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Driver = require('../models/Driver');
+const axios = require('axios'); 
 
 router.post('/', async (req, res) => {
   try {
@@ -40,6 +41,50 @@ router.delete('/:id', async (req, res) => {
     res.json({ message: 'Condutor removido com sucesso' });
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/ctt-address/:postalCode', async (req, res) => {
+  try {
+    const { postalCode } = req.params;
+    
+    // Validate postal code format (XXXX-XXX)
+    if (!/^\d{4}-\d{3}$/.test(postalCode)) {
+      return res.status(400).json({ error: 'Formato de código postal inválido. Use XXXX-XXX' });
+    }
+
+    const response = await axios.get(
+      `https://api.ctt.pt/postalcodes/v1/postalcodes/${postalCode}`,
+      {
+        headers: {
+          'Accept': 'application/json'
+        },
+        timeout: 5000 // 5 second timeout
+      }
+    );
+
+    // Transform CTT API response to match your address structure
+    const addressData = {
+      street: response.data.address || '',
+      city: response.data.city || '',
+      postalCode: postalCode
+    };
+
+    res.json(addressData);
+  } catch (err) {
+    console.error('CTT API Error:', err.message);
+    
+    if (err.response) {
+      // Forward CTT API error status code if available
+      res.status(err.response.status).json({ 
+        error: 'Erro ao buscar morada',
+        details: err.response.data 
+      });
+    } else if (err.code === 'ECONNABORTED') {
+      res.status(504).json({ error: 'Timeout ao contactar serviço de moradas' });
+    } else {
+      res.status(500).json({ error: 'Erro no servidor', details: err.message });
+    }
   }
 });
 

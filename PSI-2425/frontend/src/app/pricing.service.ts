@@ -1,12 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, timeout } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PricingService {
   private apiUrl = 'http://localhost:5000/api/pricing';
   private requestTimeout = 30000;
+
+  private pricesUpdated$ = new BehaviorSubject<void>(undefined);
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +33,15 @@ export class PricingService {
       timeout(this.requestTimeout),
       catchError(this.handleError)
     );
+  }
+
+  notifyPricesUpdated() {
+    this.pricesUpdated$.next();
+  }
+
+  // Listen for price updates
+  onPricesUpdated(): Observable<void> {
+    return this.pricesUpdated$.asObservable();
   }
 
   // Calculate trip cost

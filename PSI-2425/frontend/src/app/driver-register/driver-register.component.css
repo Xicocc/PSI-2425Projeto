@@ -28,4 +28,35 @@
       margin: 8px 0;
     }
   }
+
+  .suggestions-container {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+  
+  .suggestions-container mat-radio-button {
+    display: block;
+    margin: 8px 0;
+  }
+  
+  .manual-toggle {
+    margin-bottom: 15px;
+  }
+  
+  .loading-state {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    color: #666;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .suggestions-container {
+      padding: 8px;
+    }
+  }
   

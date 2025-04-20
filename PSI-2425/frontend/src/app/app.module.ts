@@ -31,6 +31,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PricingListComponent } from './pricing-list/pricing-list.component';
 
@@ -69,7 +70,8 @@ import { PricingListComponent } from './pricing-list/pricing-list.component';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -31,6 +31,9 @@ export class PricingFormComponent {
         next: () => {
           alert('Preços atualizados com sucesso!');
           form.resetForm();
+          
+          // Notify that prices have been updated
+          this.pricingService.notifyPricesUpdated();
         },
         error: (err) => {
           alert(`Erro: ${err.message}`);

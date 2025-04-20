@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class DriverService {
   private apiUrl = 'http://localhost:5000/api/drivers';
+  private cttApiUrl = 'https://api.ctt.pt/postalcodes/v1/6840b0dee0d942ea8f7625e5513c0af7';
   private requestTimeout = 30000;
 
   constructor(private http: HttpClient) {}
@@ -42,5 +43,12 @@ export class DriverService {
 
   deleteDriver(driverId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${driverId}`);
+  }
+
+  getAddressByPostalCode(postalCode: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/ctt-address/${postalCode}`).pipe(
+      timeout(this.requestTimeout),
+      catchError(this.handleError)
+    );
   }
 }

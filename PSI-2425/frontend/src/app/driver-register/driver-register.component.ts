@@ -14,6 +14,11 @@ export class DriverRegisterComponent {
   minBirthYear = 1900;
   maxBirthYear = this.currentYear - 18; // Minimum age 18
 
+  addressSuggestions: any[] = [];
+  manualAddressInput = false;
+  isLoadingAddress = false;
+  addressError = '';
+
   driverData = {
     name: '',
     nif: '',
@@ -69,5 +74,43 @@ export class DriverRegisterComponent {
       value = value.substring(0, 4) + '-' + value.substring(4, 7);
     }
     this.driverData.address.postalCode = value;
+
+    // Automatically fetch address when postal code is complete
+    if (value.length === 8 && !this.manualAddressInput) {
+      this.fetchAddress(value);
+    }
+  }
+
+  fetchAddress(postalCode: string) {
+    this.isLoadingAddress = true;
+    this.addressError = '';
+    
+    this.driverService.getAddressByPostalCode(postalCode).subscribe({
+      next: (response) => {
+        this.addressSuggestions = [response];
+        this.isLoadingAddress = false;
+      },
+      error: (err) => {
+        this.addressError = 'Morada não encontrada. Por favor insira manualmente.';
+        this.isLoadingAddress = false;
+        this.manualAddressInput = true;
+      }
+    });
+  }
+
+  selectAddress(address: any) {
+    this.driverData.address = {
+      street: address.address || '',
+      postalCode: address.postalCode || this.driverData.address.postalCode,
+      city: address.city || ''
+    };
+    this.addressSuggestions = [];
+  }
+
+  toggleManualInput() {
+    this.manualAddressInput = !this.manualAddressInput;
+    if (!this.manualAddressInput && this.driverData.address.postalCode.length === 8) {
+      this.fetchAddress(this.driverData.address.postalCode);
+    }
   }
 }

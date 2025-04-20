@@ -5,19 +5,16 @@
     
     <mat-card-content>
       <table mat-table [dataSource]="prices" class="mat-elevation-z8">
-        <!-- License Plate Column -->
         <ng-container matColumnDef="comfortLevel">
           <th mat-header-cell *matHeaderCellDef>Nivel Conforto<th>
           <td mat-cell *matCellDef="let prices">{{ prices.comfortLevel }}</td>
         </ng-container>
   
-        <!-- Brand Column -->
         <ng-container matColumnDef="pricePerMinute">
           <th mat-header-cell *matHeaderCellDef>Preco/min</th>
           <td mat-cell *matCellDef="let prices">{{ prices.pricePerMinute }}</td>
         </ng-container>
   
-        <!-- Model Column -->
         <ng-container matColumnDef="nightSurchargePercent">
           <th mat-header-cell *matHeaderCellDef>Taxa Noturna %</th>
           <td mat-cell *matCellDef="let prices">{{ prices.nightSurchargePercent }}</td>
