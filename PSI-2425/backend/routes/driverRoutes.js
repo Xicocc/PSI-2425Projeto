@@ -54,7 +54,7 @@ router.get('/ctt-address/:postalCode', async (req, res) => {
     }
 
     const response = await axios.get(
-      `https://api.ctt.pt/postalcodes/v1/postalcodes/${postalCode}`,
+      `https://www.cttcodigopostal.pt/api/v1/6840b0dee0d942ea8f7625e5513c0af7/${postalCode}`,
       {
         headers: {
           'Accept': 'application/json'
@@ -63,11 +63,18 @@ router.get('/ctt-address/:postalCode', async (req, res) => {
       }
     );
 
+    // Check if response contains data
+    if (!response.data || response.data.length === 0) {
+      return res.status(404).json({ error: 'Nenhuma morada encontrada para este código postal' });
+    }
+
     // Transform CTT API response to match your address structure
+    // Using the first address in the array as the primary result
+    const firstAddress = response.data[0];
     const addressData = {
-      street: response.data.address || '',
-      city: response.data.city || '',
-      postalCode: postalCode
+      street: firstAddress.morada || '',
+      locality: firstAddress.localidade || '',
+      district: firstAddress.distrito || '',
     };
 
     res.json(addressData);

@@ -6,12 +6,12 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class DriverService {
   private apiUrl = 'http://localhost:5000/api/drivers';
-  private cttApiUrl = 'https://api.ctt.pt/postalcodes/v1/6840b0dee0d942ea8f7625e5513c0af7';
+  private cttApiUrl = 'https://www.cttcodigopostal.pt/api/v1/6840b0dee0d942ea8f7625e5513c0af7';
   private requestTimeout = 30000;
 
   constructor(private http: HttpClient) {}
 
-  registerDriver(driverData: any) {
+  registerDriver(driverData: any): Observable<any> {
     return this.http.post(this.apiUrl, driverData, {
       observe: 'response',
       responseType: 'json'

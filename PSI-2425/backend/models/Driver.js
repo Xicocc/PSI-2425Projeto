@@ -62,6 +62,12 @@ const driverSchema = new mongoose.Schema({
       required: [true, 'Localidade é obrigatória'],
       trim: true,
       maxlength: [100, 'Localidade não pode exceder 100 caracteres']
+    },
+
+    district: {
+      type: String,
+      trim: true,
+      maxlength: [100, 'Distrito não pode exceder 100 caracteres']
     }
   },
 

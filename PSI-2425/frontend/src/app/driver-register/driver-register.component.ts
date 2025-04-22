@@ -2,6 +2,13 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DriverService } from '../driver.service';
 
+interface AddressSuggestion {
+  street: string;
+  locality: string;
+  district: string;
+  postalCode: string;
+}
+
 @Component({
   standalone: false,
   selector: 'app-driver-register',
@@ -14,7 +21,7 @@ export class DriverRegisterComponent {
   minBirthYear = 1900;
   maxBirthYear = this.currentYear - 18; // Minimum age 18
 
-  addressSuggestions: any[] = [];
+  addressSuggestions: AddressSuggestion[] = [];
   manualAddressInput = false;
   isLoadingAddress = false;
   addressError = '';
@@ -27,7 +34,8 @@ export class DriverRegisterComponent {
     address: {
       street: '',
       postalCode: '',
-      city: ''
+      city: '',
+      district: ''
     },
     licenseNumber: ''
   };
@@ -38,36 +46,46 @@ export class DriverRegisterComponent {
     if (form.valid) {
       // Format data according to schema requirements
       const formData = {
-        ...form.value,
-        nif: form.value.nif.trim(),
-        birthYear: Number(form.value.birthYear),
-        licenseNumber: form.value.licenseNumber.toUpperCase().trim(),
+        name: this.driverData.name.trim(),
+        nif: this.driverData.nif.trim(),
+        gender: this.driverData.gender,
+        birthYear: Number(this.driverData.birthYear),
         address: {
-          street: form.value.street.trim(),
-          postalCode: form.value.postalCode.trim(),
-          city: form.value.city.trim()
-        }
+          street: this.driverData.address.street.trim(),
+          postalCode: this.driverData.address.postalCode.trim(),
+          city: this.driverData.address.city.trim(),
+          district: this.driverData.address.district.trim() // Add this line
+        },
+        licenseNumber: this.driverData.licenseNumber.toUpperCase().trim()
       };
-
+  
       console.log('Submitting driver:', formData);
-
+  
       this.driverService.registerDriver(formData).subscribe({
         next: (response) => {
           console.log('Registration successful:', response);
           alert('Condutor registado com sucesso!');
           form.resetForm();
           // Reset nested address object
-          this.driverData.address = { street: '', postalCode: '', city: '' };
+          this.driverData.address = { street: '', postalCode: '', city: '' , district: ''};
         },
         error: (err) => {
           console.error('Registration error:', err);
           alert(`Erro no registo: ${err.error?.message || err.message}`);
         }
       });
+    } else {
+      // Log form errors for debugging
+      console.log('Form errors:', form.errors);
+      Object.keys(form.controls).forEach(key => {
+        const controlErrors = form.controls[key].errors;
+        if (controlErrors) {
+          console.log('Control:', key, 'Errors:', controlErrors);
+        }
+      });
     }
   }
 
-  // Helper to format postal code (adds hyphen if missing)
   formatPostalCode(event: any) {
     let value = event.target.value.replace(/\D/g, '');
     if (value.length > 4) {
@@ -75,7 +93,6 @@ export class DriverRegisterComponent {
     }
     this.driverData.address.postalCode = value;
 
-    // Automatically fetch address when postal code is complete
     if (value.length === 8 && !this.manualAddressInput) {
       this.fetchAddress(value);
     }
@@ -84,10 +101,16 @@ export class DriverRegisterComponent {
   fetchAddress(postalCode: string) {
     this.isLoadingAddress = true;
     this.addressError = '';
+    this.addressSuggestions = [];
     
     this.driverService.getAddressByPostalCode(postalCode).subscribe({
       next: (response) => {
-        this.addressSuggestions = [response];
+        this.addressSuggestions = [{
+          street: response.street,
+          locality: response.locality,
+          district: response.district,
+          postalCode: postalCode
+        }];
         this.isLoadingAddress = false;
       },
       error: (err) => {
@@ -98,13 +121,15 @@ export class DriverRegisterComponent {
     });
   }
 
-  selectAddress(address: any) {
+  selectAddress(address: AddressSuggestion) {
     this.driverData.address = {
-      street: address.address || '',
-      postalCode: address.postalCode || this.driverData.address.postalCode,
-      city: address.city || ''
+      street: address.street,
+      postalCode: address.postalCode,
+      city: address.locality, // Map locality to city
+      district: address.district // Ensure district is included
     };
     this.addressSuggestions = [];
+    this.manualAddressInput = false;
   }
 
   toggleManualInput() {

@@ -1,42 +1,54 @@
 <mat-card>
-    <mat-card-title>Registar Condutor</mat-card-title>
-    <mat-card-content>
-      <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="driver-form">
-        <!-- Personal Information Section -->
-        <h3 class="section-title">Informação Pessoal</h3>
-        
-        <!-- Name -->
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Nome Completo</mat-label>
-          <input matInput name="name" ngModel required maxlength="100">
-        </mat-form-field>
-  
-        <!-- NIF -->
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>NIF</mat-label>
-          <input matInput name="nif" ngModel required 
-                 pattern="[0-9]{9}" minlength="9" maxlength="9"
-                 placeholder="9 dígitos">
-          <mat-hint>Deve conter exatamente 9 dígitos</mat-hint>
-        </mat-form-field>
-  
-        <!-- Gender -->
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Género</mat-label>
-          <mat-select name="gender" ngModel required>
-            <mat-option *ngFor="let gender of genders" [value]="gender">{{ gender }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-  
-        <!-- Birth Year -->
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Ano de Nascimento</mat-label>
-          <input matInput type="number" name="birthYear" ngModel required
-                 [min]="minBirthYear" [max]="maxBirthYear">
-          <mat-hint>Idade mínima: 18 anos</mat-hint>
-        </mat-form-field>
-  
-        <!-- Address Section -->
+  <mat-card-title>Registar Condutor</mat-card-title>
+  <mat-card-content>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="driver-form">
+      <!-- Personal Information Section -->
+      <h3 class="section-title">Informação Pessoal</h3>
+      
+      <!-- Name -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nome Completo</mat-label>
+        <input matInput name="name" [(ngModel)]="driverData.name" required maxlength="100">
+        <mat-error *ngIf="form.controls['name']?.invalid && form.controls['name']?.touched">
+          Nome é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <!-- NIF -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>NIF</mat-label>
+        <input matInput name="nif" [(ngModel)]="driverData.nif" required 
+               pattern="[0-9]{9}" minlength="9" maxlength="9"
+               placeholder="9 dígitos">
+        <mat-hint>Deve conter exatamente 9 dígitos</mat-hint>
+        <mat-error *ngIf="form.controls['nif']?.invalid && form.controls['nif']?.touched">
+          NIF inválido (9 dígitos necessários)
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Gender -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Género</mat-label>
+        <mat-select name="gender" [(ngModel)]="driverData.gender" required>
+          <mat-option *ngFor="let gender of genders" [value]="gender">{{ gender }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['gender']?.invalid && form.controls['gender']?.touched">
+          Género é obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Birth Year -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Ano de Nascimento</mat-label>
+        <input matInput type="number" name="birthYear" [(ngModel)]="driverData.birthYear" required
+               [min]="minBirthYear" [max]="maxBirthYear">
+        <mat-hint>Idade mínima: 18 anos</mat-hint>
+        <mat-error *ngIf="form.controls['birthYear']?.invalid && form.controls['birthYear']?.touched">
+          Ano de nascimento inválido
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Address Section -->
       <h3 class="section-title">Morada</h3>
       
       <!-- Postal Code -->
@@ -47,6 +59,9 @@
                (input)="formatPostalCode($event)"
                placeholder="0000-000">
         <mat-hint>Insira o código postal para buscar a morada</mat-hint>
+        <mat-error *ngIf="form.controls['postalCode']?.invalid && form.controls['postalCode']?.touched">
+          Código postal inválido (formato: 0000-000)
+        </mat-error>
       </mat-form-field>
 
       <!-- Address Suggestions -->
@@ -55,7 +70,7 @@
           <mat-radio-button *ngFor="let address of addressSuggestions" 
                            [value]="address" 
                            (click)="selectAddress(address)">
-            {{ address.address }}, {{ address.city }}
+            {{ address.street }}, {{ address.locality }}, {{ address.district }}
           </mat-radio-button>
         </mat-radio-group>
       </div>
@@ -65,20 +80,37 @@
         {{ manualAddressInput ? 'Usar busca automática' : 'Inserir morada manualmente' }}
       </mat-checkbox>
 
-      <!-- Street (shown always but conditionally required) -->
+      <!-- Street -->
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Rua</mat-label>
         <input matInput name="street" [(ngModel)]="driverData.address.street" 
                [required]="manualAddressInput || addressSuggestions.length === 0" 
                maxlength="200">
+        <mat-error *ngIf="form.controls['street']?.invalid && form.controls['street']?.touched">
+          Rua é obrigatória
+        </mat-error>
       </mat-form-field>
 
-      <!-- City (shown always but conditionally required) -->
+      <!-- City -->
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Localidade</mat-label>
         <input matInput name="city" [(ngModel)]="driverData.address.city" 
                [required]="manualAddressInput || addressSuggestions.length === 0" 
                maxlength="100">
+        <mat-error *ngIf="form.controls['city']?.invalid && form.controls['city']?.touched">
+          Localidade é obrigatória
+        </mat-error>
+      </mat-form-field>
+
+      <!-- District (shown only in manual mode) -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Distrito</mat-label>
+        <input matInput name="district" [(ngModel)]="driverData.address.district" 
+               [required]="manualAddressInput" 
+               maxlength="100">
+        <mat-error *ngIf="form.controls['district']?.invalid && form.controls['district']?.touched">
+          Distrito é obrigatório
+        </mat-error>
       </mat-form-field>
 
       <!-- Loading and Error States -->
@@ -86,24 +118,30 @@
         <mat-spinner diameter="20"></mat-spinner>
         <span>A buscar morada...</span>
       </div>
-      <mat-error *ngIf="addressError">{{ addressError }}</mat-error>
+      
+      <div *ngIf="addressError" class="error-message">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ addressError }}</span>
+      </div>
 
-  
-        <!-- Driver Specific Section -->
-        <h3 class="section-title">Documentos</h3>
-        
-        <!-- License Number -->
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Carta de Condução</mat-label>
-          <input matInput name="licenseNumber" ngModel required 
-                 pattern="[A-Z0-9]{6,12}" 
-                 placeholder="6-12 caracteres alfanuméricos">
-        </mat-form-field>
-  
-        <!-- Submit Button -->
-        <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="form.invalid">
-          Registar Condutor
-        </button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+      <!-- Driver Specific Section -->
+      <h3 class="section-title">Documentos</h3>
+      
+      <!-- License Number -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Carta de Condução</mat-label>
+        <input matInput name="licenseNumber" [(ngModel)]="driverData.licenseNumber" required 
+               pattern="[A-Z0-9]{6,12}" 
+               placeholder="6-12 caracteres alfanuméricos">
+        <mat-error *ngIf="form.controls['licenseNumber']?.invalid && form.controls['licenseNumber']?.touched">
+          Número de carta inválido
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="form.invalid">
+        Registar Condutor
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
