@@ -8,7 +8,7 @@ const taxiSchema = new mongoose.Schema({
     required: true,
     unique: true,
     validate: {
-      validator: (v) => /^[A-Z0-9]{6}$/.test(v),
+      validator: (v) => /^([A-Z]{2}-?\d{2}-?[A-Z]{2}|[A-Z]{2}-?\d{2}-?[A-Z]{2}|\d{2}-?[A-Z]{2}-?\d{2}|\d{2}-?\d{2}-?[A-Z]{2}|[A-Z]{2}-?\d{2}-?\d{2})$/i.test(v),
       message: 'Matricula tem de ter 6 caracteres com letras e numeros!'
     }
   },
