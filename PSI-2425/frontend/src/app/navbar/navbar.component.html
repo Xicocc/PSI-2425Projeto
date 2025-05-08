@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+    <span routerLink="/" style="cursor: pointer; display: flex; align-items: center;">
+      <mat-icon>home</mat-icon>
+      Taxi Manager
+    </span>
+  
+    <!-- Admin Links -->
+    <nav class="nav-links" *ngIf="currentRole === 'admin'">
+      <a mat-button routerLink="/admin/register-taxi" routerLinkActive="active">
+        <mat-icon>local_taxi</mat-icon>
+        Register Taxi
+      </a>
+      <a mat-button routerLink="/admin/list-taxi" routerLinkActive="active">
+        <mat-icon>list_alt</mat-icon>
+        Taxi List
+      </a>
+      <a mat-button routerLink="/admin/register-driver" routerLinkActive="active">
+        <mat-icon>perm_identity</mat-icon>
+        Register Driver
+      </a>
+      <a mat-button routerLink="/admin/list-driver" routerLinkActive="active">
+        <mat-icon>face</mat-icon>
+        Driver List
+      </a>
+      <a mat-button routerLink="/admin/pricing" routerLinkActive="active">
+        <mat-icon>monetization_on</mat-icon>
+        Pricing
+      </a>
+      <a mat-button routerLink="/admin/calculator" routerLinkActive="active">
+        <mat-icon>place</mat-icon>
+        Calculate Trip
+      </a>
+    </nav>
+  
+    <!-- Add other role-specific navs here later -->
+  
+    <span class="spacer"></span>
+  
+    <button mat-button *ngIf="currentRole" (click)="returnToHome()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-toolbar>

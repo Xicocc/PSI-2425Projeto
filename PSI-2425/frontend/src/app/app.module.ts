@@ -34,6 +34,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PricingListComponent } from './pricing-list/pricing-list.component';
+import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.component';
+import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { DriverLoginComponent } from './driver-login/driver-login.component';
+import { ClientLoginComponent } from './client-login/client-login.component';
 
 
 @NgModule({
@@ -47,6 +54,13 @@ import { PricingListComponent } from './pricing-list/pricing-list.component';
     PricingFormComponent,
     TripCalculatorComponent,
     PricingListComponent,
+    DriverDashboardComponent,
+    ClientDashboardComponent,
+    AdminDashboardComponent,
+    NavbarComponent,
+    AdminLoginComponent,
+    DriverLoginComponent,
+    ClientLoginComponent,
   ],
   imports: [
     BrowserModule,

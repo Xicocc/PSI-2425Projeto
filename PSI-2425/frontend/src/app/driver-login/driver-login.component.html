@@ -1,0 +1,26 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header class="card-header">
+      <mat-card-title class="centered-title">Driver Login</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="card-content">
+      <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Driver's License</mat-label>
+          <input matInput [(ngModel)]="driverId" name="driverId" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" class="login-button">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

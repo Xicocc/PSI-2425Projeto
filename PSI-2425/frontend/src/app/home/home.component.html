@@ -1,42 +1,29 @@
 <mat-card class="home-card">
-    <mat-card-header>
-      <mat-card-title>Bem-vindo à Gestão de Táxis</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="home-content">
-        <p>Selecione uma opção abaixo para começar:</p>
+  <mat-card-header class="card-header">
+    <mat-card-title class="welcome-title">Welcome to Taxi Management</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="home-content">
+      <p class="role-prompt">Please select your role:</p>
+      
+      <div class="role-buttons">
+        <button mat-raised-button color="primary" (click)="navigateToDriver()">
+          <mat-icon>directions_car</mat-icon>
+          I'm a Driver
+        </button>
         
-        <div class="action-buttons">
-          <a mat-raised-button color="primary" routerLink="/register-taxi">
-            <mat-icon>local_taxi</mat-icon>
-            Registar Novo Táxi
-          </a>
-          
-          <a mat-raised-button color="accent" routerLink="/list-taxi">
-            <mat-icon>list_alt</mat-icon>
-            Lista de Táxis
-          </a>
-
-          <a mat-raised-button color="primary" routerLink="/register-driver">
-            <mat-icon>perm_identity</mat-icon>
-            Registar Novo Condutor
-          </a>
-
-          <a mat-raised-button color="accent" routerLink="/list-driver">
-            <mat-icon>face</mat-icon>
-            Lista de Condutores
-          </a>
-
-          <a mat-raised-button color="primary" routerLink="/pricing">
-            <mat-icon>monetization_on</mat-icon>
-            Preços
-          </a>
-
-          <a mat-raised-button color="accent" routerLink="/calculator">
-            <mat-icon>place</mat-icon>
-            Calcular Viagem
-          </a>
-        </div>
+        <button mat-raised-button color="accent" (click)="navigateToClient()">
+          <mat-icon>person</mat-icon>
+          I'm a Client
+        </button>
       </div>
-    </mat-card-content>
-  </mat-card>
+
+      <div class="admin-link">
+        <a (click)="navigateToAdmin()">
+          <mat-icon>admin_panel_settings</mat-icon>
+          I'm the Admin
+        </a>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

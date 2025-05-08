@@ -1,0 +1,42 @@
+<mat-card class="home-card">
+    <mat-card-header class="card-header">
+      <mat-card-title class= "welcome-title">Welcome to Taxi Management (Admin)</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="home-content">
+        <p>Select an option below to begin:</p>
+        
+        <div class="action-buttons">
+          <a mat-raised-button color="primary" routerLink="/admin/register-taxi">
+            <mat-icon>local_taxi</mat-icon>
+            Register New Taxi
+          </a>
+          
+          <a mat-raised-button color="accent" routerLink="/admin/list-taxi">
+            <mat-icon>list_alt</mat-icon>
+            Taxi List
+          </a>
+  
+          <a mat-raised-button color="primary" routerLink="/admin/register-driver">
+            <mat-icon>perm_identity</mat-icon>
+            Register New Driver
+          </a>
+  
+          <a mat-raised-button color="accent" routerLink="/admin/list-driver">
+            <mat-icon>face</mat-icon>
+            Driver List
+          </a>
+  
+          <a mat-raised-button color="primary" routerLink="/admin/pricing">
+            <mat-icon>monetization_on</mat-icon>
+            Pricing
+          </a>
+  
+          <a mat-raised-button color="accent" routerLink="/admin/calculator">
+            <mat-icon>place</mat-icon>
+            Calculate Trip
+          </a>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
