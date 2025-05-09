@@ -1,25 +1,30 @@
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-header class="card-header">
-      <mat-card-title class="centered-title">Driver Login</mat-card-title>
+      <mat-card-title class="centered-title">Login Condutores</mat-card-title>
     </mat-card-header>
 
     <mat-card-content class="card-content">
-      <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Driver's License</mat-label>
-          <input matInput [(ngModel)]="driverId" name="driverId" required>
-        </mat-form-field>
+      <form (ngSubmit)="login()" class="login-form">
 
         <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Password</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
-          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" type="button">
-            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
+          <mat-label>NIF ou selecione da lista</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControl]="driverControl"
+            [matAutocomplete]="auto"
+            placeholder="Escreva o nome ou NIF">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayDriverName">
+            <mat-option *ngFor="let driver of filteredDrivers | async" [value]="driver">
+              {{ driver.name }} (NIF: {{ driver.nif }})
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" class="login-button">Login</button>
+        <button mat-raised-button color="primary" type="submit" class="login-button">
+          Aceder à conta
+        </button>
       </form>
     </mat-card-content>
   </mat-card>

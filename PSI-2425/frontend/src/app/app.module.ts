@@ -42,7 +42,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientRegisterComponent } from './client-register/client-register.component';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -89,7 +89,8 @@ import { ClientRegisterComponent } from './client-register/client-register.compo
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
