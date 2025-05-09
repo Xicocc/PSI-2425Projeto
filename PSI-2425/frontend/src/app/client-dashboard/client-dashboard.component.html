@@ -1,8 +1,36 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Client Dashboard</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>I'm in the client dashboard</p>
-    </mat-card-content>
-  </mat-card>
+<mat-card class="dashboard-card">
+  <mat-card-header>
+    <mat-card-title>Client Dashboard</mat-card-title>
+    <mat-card-subtitle>Welcome, {{currentClient.name}}</mat-card-subtitle>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <mat-tab-group>
+      <!-- Trip Request Tab -->
+      <mat-tab label="Request Trip">
+        <div class="tab-content">
+          <app-client-trip-request 
+            (tripCreated)="onTripCreated($event)">
+          </app-client-trip-request>
+        </div>
+      </mat-tab>
+
+      <!-- Active Trips Tab -->
+      <mat-tab label="My Trips">
+        <div class="tab-content">
+          <mat-list>
+            <mat-list-item *ngFor="let trip of activeTrips">
+              <h3 matLine>From: {{trip.pickupLocation}}</h3>
+              <p matLine>To: {{trip.destination}}</p>
+              <mat-chip>{{trip.status}}</mat-chip>
+            </mat-list-item>
+            
+            <mat-list-item *ngIf="activeTrips.length === 0">
+              <p matLine>No active trips</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

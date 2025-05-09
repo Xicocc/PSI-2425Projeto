@@ -6,6 +6,7 @@ const taxiRoutes = require('./routes/taxiRoutes');
 const driverRoutes = require('./routes/driverRoutes');
 const pricingRoutes = require('./routes/pricingRoutes');
 const clientRoutes = require('./routes/clientRoutes');
+const tripRoutes = require('./routes/tripRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +28,8 @@ app.use('/api/taxis', taxiRoutes);
 app.use('/api/drivers', driverRoutes);
 app.use('/api/pricing', pricingRoutes);
 app.use('/api/clients', clientRoutes);
+app.use('/api/trips', tripRoutes);
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Server error' });

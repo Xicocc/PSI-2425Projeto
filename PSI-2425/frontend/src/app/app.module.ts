@@ -43,6 +43,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientRegisterComponent } from './client-register/client-register.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ClientTripRequestComponent } from './client-trip-request/client-trip-request.component';
+import { ClientTripListComponent } from './client-trip-list/client-trip-list.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
+
 
 
 
@@ -65,6 +70,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     DriverLoginComponent,
     ClientLoginComponent,
     ClientRegisterComponent,
+    ClientTripRequestComponent,
+    ClientTripListComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +97,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatNativeDateModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTabsModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

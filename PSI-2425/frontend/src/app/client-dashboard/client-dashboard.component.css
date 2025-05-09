@@ -1,0 +1,12 @@
+.dashboard-card {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .tab-content {
+    padding: 16px;
+  }
+  
+  mat-list-item {
+    border-bottom: 1px solid #eee;
+  }
