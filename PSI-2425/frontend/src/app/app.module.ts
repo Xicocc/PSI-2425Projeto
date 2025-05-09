@@ -41,6 +41,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { DriverLoginComponent } from './driver-login/driver-login.component';
 import { ClientLoginComponent } from './client-login/client-login.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { ClientLoginComponent } from './client-login/client-login.component';
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -28,17 +28,11 @@ export class DriverService {
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
-    console.error('Error details:', error);
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      return throwError(() => new Error(`Frontend Error: ${error.error.message}`));
-    } else {
-      // Backend error
-      return throwError(() => new Error(
-        `Backend Error: ${error.status} - ${error.error?.message || error.message}`
-      ));
-    }
+  getDriverByNIF(nif: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/nif/${nif}`).pipe(
+      timeout(this.requestTimeout),
+      catchError(this.handleError)
+    );
   }
 
   deleteDriver(driverId: string): Observable<any> {
@@ -50,5 +44,16 @@ export class DriverService {
       timeout(this.requestTimeout),
       catchError(this.handleError)
     );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('Error details:', error);
+    if (error.error instanceof ErrorEvent) {
+      return throwError(() => new Error(`Frontend Error: ${error.error.message}`));
+    } else {
+      return throwError(() => new Error(
+        `Backend Error: ${error.status} - ${error.error?.message || error.message}`
+      ));
+    }
   }
 }
