@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-content>
+    <!-- Taxi Request Form -->
+    <form [formGroup]="taxiRequestForm" (ngSubmit)="submitRequest()">
+      <h2>Requisitar Taxi para Turno</h2>
+
+      <!-- Shift Start Time -->
+      <mat-form-field>
+        <mat-label>Início do Turno</mat-label>
+        <input matInput type="datetime-local" formControlName="shiftStart" placeholder="Escolha a data e hora de início">
+      </mat-form-field>
+
+      <!-- Shift End Time -->
+      <mat-form-field>
+        <mat-label>Fim do Turno</mat-label>
+        <input matInput type="datetime-local" formControlName="shiftEnd" placeholder="Escolha a data e hora de fim">
+      </mat-form-field>
+
+      <!-- Taxi Selection -->
+      <mat-form-field>
+        <mat-label>Selecione o Táxi</mat-label>
+        <mat-select formControlName="taxiId">
+          <mat-option *ngFor="let taxi of availableTaxis" [value]="taxi._id">
+            {{ taxi.licensePlate }} - {{ taxi.brand }} {{ taxi.model }} ({{ taxi.comfortLevel }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="!taxiRequestForm.valid">Requisitar</button>
+    </form>
+  </mat-card-content>
+</mat-card>

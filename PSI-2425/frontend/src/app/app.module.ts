@@ -43,6 +43,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientRegisterComponent } from './client-register/client-register.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DriverRequestTaxiComponent } from './driver-request-taxi/driver-request-taxi.component';
 
 
 
@@ -65,6 +66,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     DriverLoginComponent,
     ClientLoginComponent,
     ClientRegisterComponent,
+    DriverRequestTaxiComponent
   ],
   imports: [
     BrowserModule,

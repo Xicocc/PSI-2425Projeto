@@ -1,8 +1,21 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Driver Dashboard</mat-card-title>
+<div class="dashboard-container">
+  <mat-card class="dashboard-card">
+    <mat-card-header class="dashboard-header">
+      <mat-card-title>Welcome, {{ driver?.name || 'Driver' }}</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      <p>I'm in the driver dashboard</p>
+    <mat-card-content class="dashboard-content">
+      <p>You are logged in as <strong>{{ driver?.licenseNumber }}</strong>.</p>
+      <p>This is your dashboard.</p>
+
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/driver/request-taxi"
+        style="margin-top: 1rem;"
+      >
+        Requisitar Táxi para Turno
+      </button>
+
     </mat-card-content>
   </mat-card>
+</div>

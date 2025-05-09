@@ -14,6 +14,7 @@ import { ClientLoginComponent } from './client-login/client-login.component';
 import { DriverLoginComponent } from './driver-login/driver-login.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { ClientRegisterComponent } from './client-register/client-register.component';
+import { DriverRequestTaxiComponent } from './driver-request-taxi/driver-request-taxi.component';
 
 
 // app-routing.module.ts
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'driver', 
     children: [
       { path: '', component: DriverLoginComponent },
-      { path: 'dashboard', component: DriverDashboardComponent }
+      { path: 'dashboard', component: DriverDashboardComponent },
+      { path: 'request-taxi', component: DriverRequestTaxiComponent }
     ]},
   { path: 'client', 
     children: [

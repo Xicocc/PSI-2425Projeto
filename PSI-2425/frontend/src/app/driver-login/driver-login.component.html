@@ -22,7 +22,13 @@
           </mat-autocomplete>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" class="login-button">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="login-button"
+          [disabled]="!driverControl.value"
+        >
           Aceder à conta
         </button>
       </form>
