@@ -5,6 +5,7 @@ const cors = require('cors');
 const taxiRoutes = require('./routes/taxiRoutes');
 const driverRoutes = require('./routes/driverRoutes');
 const pricingRoutes = require('./routes/pricingRoutes');
+const clientRoutes = require('./routes/clientRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,6 +26,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/api/taxis', taxiRoutes);
 app.use('/api/drivers', driverRoutes);
 app.use('/api/pricing', pricingRoutes);
+app.use('/api/clients', clientRoutes);
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Server error' });

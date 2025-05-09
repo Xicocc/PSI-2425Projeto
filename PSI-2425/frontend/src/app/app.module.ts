@@ -12,6 +12,14 @@ import { DriverRegisterComponent } from './driver-register/driver-register.compo
 import { DriverListComponent } from './driver-list/driver-list.component';
 import { PricingFormComponent } from './pricing-form/pricing-form.component';
 import { TripCalculatorComponent } from './trip-calculator/trip-calculator.component';
+import { PricingListComponent } from './pricing-list/pricing-list.component';
+import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.component';
+import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { DriverLoginComponent } from './driver-login/driver-login.component';
+import { ClientLoginComponent } from './client-login/client-login.component';
 
 // Material Modules
 import { MatTableModule } from '@angular/material/table';
@@ -33,14 +41,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PricingListComponent } from './pricing-list/pricing-list.component';
-import { DriverDashboardComponent } from './driver-dashboard/driver-dashboard.component';
-import { ClientDashboardComponent } from './client-dashboard/client-dashboard.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
-import { DriverLoginComponent } from './driver-login/driver-login.component';
-import { ClientLoginComponent } from './client-login/client-login.component';
+import { ClientRegisterComponent } from './client-register/client-register.component';
+
+
 
 
 @NgModule({
@@ -61,6 +64,7 @@ import { ClientLoginComponent } from './client-login/client-login.component';
     AdminLoginComponent,
     DriverLoginComponent,
     ClientLoginComponent,
+    ClientRegisterComponent,
   ],
   imports: [
     BrowserModule,

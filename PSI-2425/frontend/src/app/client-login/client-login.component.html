@@ -1,3 +1,4 @@
+<!-- client-login-component.html -->
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-header class="card-header">
@@ -7,21 +8,34 @@
     <mat-card-content class="card-content">
       <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
         <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Username</mat-label>
-          <input matInput type="username" [(ngModel)]="username" name="username" required>
+          <mat-label>NIF (9 digits)</mat-label>
+          <input matInput type="text" [(ngModel)]="nif" name="nif" required
+                 pattern="[0-9]{9}" maxlength="9" #nifInput="ngModel">
+          <mat-error *ngIf="nifInput.invalid && (nifInput.dirty || nifInput.touched)">
+            Please enter a valid 9-digit NIF
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
-          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" type="button">
+          <input matInput [type]="hidePassword ? 'password' : 'text'" 
+                 [(ngModel)]="password" name="password" required>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" 
+                  [attr.aria-label]="'Hide password'" type="button">
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
 
         <div class="button-group">
-          <button mat-raised-button color="primary" type="submit" class="login-button">Login</button>
-          <button mat-stroked-button color="primary" (click)="register()" type="button" class="register-button">Register</button>
+          <button mat-raised-button color="primary" type="submit" 
+                  class="login-button" [disabled]="isLoading || !loginForm.valid">
+            <span *ngIf="!isLoading">Login</span>
+            <mat-spinner *ngIf="isLoading" diameter="24"></mat-spinner>
+          </button>
+          <button mat-stroked-button color="primary" (click)="register()" 
+                  type="button" class="register-button" [disabled]="isLoading">
+            Register
+          </button>
         </div>
       </form>
     </mat-card-content>

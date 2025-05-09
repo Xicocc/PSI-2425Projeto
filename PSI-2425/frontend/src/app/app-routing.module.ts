@@ -13,6 +13,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { ClientLoginComponent } from './client-login/client-login.component';
 import { DriverLoginComponent } from './driver-login/driver-login.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { ClientRegisterComponent } from './client-register/client-register.component';
+
 
 // app-routing.module.ts
 const routes: Routes = [
@@ -20,12 +22,13 @@ const routes: Routes = [
   { path: 'driver', 
     children: [
       { path: '', component: DriverLoginComponent },
-      { path: 'dashboard', component: DriverDashboardComponent },
+      { path: 'dashboard', component: DriverDashboardComponent }
     ]},
   { path: 'client', 
     children: [
       { path: '', component: ClientLoginComponent },
-      { path: 'dashboard', component: ClientDashboardComponent },
+      { path: 'register', component: ClientRegisterComponent },
+      { path: 'dashboard', component: ClientDashboardComponent }
     ]},
   { path: 'admin',
     children: [
